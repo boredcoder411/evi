@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>FPS Game</title>
+		<style>
+      p {
+        color: white;
+        font-family: monospace;
+      }
+			body {
+                margin: 0;
+            }
+      #bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -100;
+      }
+      ul {
+        color: white;
+        font-family: monospace;
+        list-style-type: none;
+      }
+		</style>
+	</head>
+	<body>
+    <ul></ul>
+      <div>
+    <input placeholder="message">
+    <button>Send</button>
+      </div>
+    <canvas id ="bg"></canvas>
+    <script src="https://cdn.socket.io/socket.io-3.0.0.js"></script>
+    <script defer src="app.js"></script>
+        <!--<script src="./stats.min.js"></script>
+        <script>
+            var stats = new Stats();
+            stats.showPanel( 0 );
+            document.body.appendChild( stats.dom );
+
+            function animate() {
+	            stats.begin();
+	            stats.end();
+	            requestAnimationFrame( animate );
+            }
+
+            requestAnimationFrame( animate );
+        </script>
+    -->
+        <script type="module">
+            import * as THREE from "https://cdn.skypack.dev/three@0.136"
+            import {PointerLockControls} from "https://cdn.skypack.dev/three@0.136/examples/jsm/controls/PointerLockControls"
+            const grid = new THREE.GridHelper()
+            grid.position.set(0, -0.5, 0)
+			      const scene = new THREE.Scene();
+			      const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+			      const renderer = new THREE.WebGLRenderer({
+                canvas: document.querySelector("#bg")
+            });
+			      renderer.setSize( window.innerWidth, window.innerHeight );
+			      camera.position.z = 5;
+            scene.add( grid )
+
+            const controls = new PointerLockControls(camera, renderer.domElement)
+            const clock = new THREE.Clock()
+            const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+            const material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+            const cube = new THREE.Mesh( geometry, material );
+            scene.add( cube );
+            renderer.domElement.addEventListener("click", () => {
+                controls.lock()
+            })
+
+            let keyboard = []
+            addEventListener("keydown", (e) => {
+                keyboard[e.key] = true
+            })
+
+            addEventListener("keyup", (e) => {
+                keyboard[e.key] = false
+            })
+            function getRandomInt(max) {
+              return Math.floor(Math.random() * max);
+            }
+            function processKeyboard(delta) {
+                var speed = 5
+                var actualSpeed = speed * delta
+                if (keyboard["w"]) {
+                    controls.moveForward(actualSpeed)
+                }
+                if (keyboard["s"]) {
+                    controls.moveForward(-actualSpeed)
+                }
+                if (keyboard["d"]) {
+                    controls.moveRight(actualSpeed)
+                }
+                if (keyboard["a"]) {
+                    controls.moveRight(-actualSpeed)
+                }
+                if (keyboard["t"]) {
+                    controls.unlock()
+                  document.querySelector("input").focus()
+                }
+                /*
+                if (keyboard[" "]) {
+                    controls.getObject().position.y += actualSpeed
+                }
+                if (keyboard["Shift"] && controls.getObject().position.y > 0) {
+                    controls.getObject().position.y -= actualSpeed
+                }
+              */
+            }
+			function animate() {
+				renderer.render( scene, camera );
+        var delta = clock.getDelta()
+        processKeyboard(delta)
+        requestAnimationFrame( animate );
+      }
+      animate();
+		</script>
+    <p id="usrname"></p>
+	</body>
+</html>
