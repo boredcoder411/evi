@@ -49,6 +49,7 @@
         </script>
     -->
         <script type="module">
+				var pos = [0, 0]
             import * as THREE from "https://cdn.skypack.dev/three@0.136"
             import {PointerLockControls} from "https://cdn.skypack.dev/three@0.136/examples/jsm/controls/PointerLockControls"
             const grid = new THREE.GridHelper()
@@ -88,15 +89,19 @@
                 var actualSpeed = speed * delta
                 if (keyboard["w"]) {
                     controls.moveForward(actualSpeed)
+										pos[1]++
                 }
                 if (keyboard["s"]) {
                     controls.moveForward(-actualSpeed)
+										pos[1]--
                 }
                 if (keyboard["d"]) {
                     controls.moveRight(actualSpeed)
+										pos[0]++
                 }
                 if (keyboard["a"]) {
                     controls.moveRight(-actualSpeed)
+										pos[0]--
                 }
                 if (keyboard["t"]) {
                     controls.unlock()
@@ -113,8 +118,9 @@
             }
 			function animate() {
 				renderer.render( scene, camera );
-        var delta = clock.getDelta()
-        processKeyboard(delta)
+        var delta = clock.getDelta();
+        processKeyboard(delta);
+				emit("cemit", pos);
         requestAnimationFrame( animate );
       }
       animate();
