@@ -4,29 +4,39 @@
 		<meta charset="utf-8">
 		<title>FPS Game</title>
 		<style>
+			* {
+				overflow: hidden;
+			}
+
       p {
         color: white;
         font-family: monospace;
       }
+
 			body {
                 margin: 0;
-            }
+      }
+
       #bg {
         position: fixed;
         top: 0;
         left: 0;
         z-index: -100;
       }
+
       ul {
         color: white;
         font-family: monospace;
         list-style-type: none;
       }
-			img {
-  			position: absolute;
-  			top: 70%;
-  			left: 50%;
-  			transform: translate(-50%, -50%);
+
+			.gun {
+				width:100vw;
+  			height:100vh;
+  			margin:0;
+  			display:flex;
+  			justify-content:center;
+  			align-items:flex-end;
 			}
 		</style>
 	</head>
@@ -39,7 +49,7 @@
     <canvas id ="bg"></canvas>
     <script src="https://cdn.socket.io/socket.io-3.0.0.js"></script>
     <script defer src="app.js"></script>
-        <!--<script src="./stats.min.js"></script>
+        <script src="./stats.min.js"></script>
         <script>
             var stats = new Stats();
             stats.showPanel( 0 );
@@ -53,8 +63,29 @@
 
             requestAnimationFrame( animate );
         </script>
-    -->
+		<p id="displ"></p>
         <script type="module">
+				window.addEventListener("gamepadconnected", event => {
+					console.log(event.gamepad)
+					update()
+				})
+				function update() {
+					const gamepadDisplay = document.getElementById("displ")
+					const gamepads = navigator.getGamepads()
+					if (gamepads[0]) {
+						const gamepadState = {
+							id: gamepads[0].id,
+							axes: [
+								gamepads[0].axes[0].toFixed(2),
+								gamepads[0].axes[1].toFixed(2),
+								gamepads[0].axes[2].toFixed(2),
+								gamepads[0].axes[3].toFixed(2)
+							]
+						}
+						gamepadDisplay.textContent = JSON.stringify(gamepadState, null, 2)
+					}
+					requestAnimationFrame( update )
+				}
             import * as THREE from "https://cdn.skypack.dev/three@0.136"
             import {PointerLockControls} from "https://cdn.skypack.dev/three@0.136/examples/jsm/controls/PointerLockControls"
             const grid = new THREE.GridHelper()
@@ -74,7 +105,7 @@
             const material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
             const cube = new THREE.Mesh( geometry, material );
             scene.add( cube );
-            renderer.domElement.addEventListener("click", () => {
+            document.addEventListener("click", () => {
                 controls.lock()
             })
 
@@ -127,8 +158,8 @@
       animate();
 		</script>
     <p id="usrname"></p>
-		<div class="yes">
-			<img src="./yes.png" alt="yesyesyesfireyesyesyes">
+		<div class="gun">
+			<img src="./yes.png" alt="gun">
 		</div>
 	</body>
 </html>
