@@ -50,7 +50,7 @@
     <script src="https://cdn.socket.io/socket.io-3.0.0.js"></script>
     <script defer src="app.js"></script>
         <script src="./stats.min.js"></script>
-        <script>
+        <!--<script>
             var stats = new Stats();
             stats.showPanel( 0 );
             document.body.appendChild( stats.dom );
@@ -63,6 +63,7 @@
 
             requestAnimationFrame( animate );
         </script>
+			-->
 		<p id="displ"></p>
         <script type="module">
 				window.addEventListener("gamepadconnected", event => {
@@ -105,7 +106,7 @@
             const material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
             const cube = new THREE.Mesh( geometry, material );
             scene.add( cube );
-            document.addEventListener("click", () => {
+            document.querySelector(".gun").addEventListener("click", () => {
                 controls.lock()
             })
 
