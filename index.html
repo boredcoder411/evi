@@ -38,15 +38,78 @@
   			justify-content: center;
   			align-items: flex-end;
 			}
+
+			.topnav {
+  overflow: hidden;
+  background-color: #333;
+  position: relative;
+	font-family: monospace;
+}
+
+/* Hide the links inside the navigation menu (except for logo/home) */
+.topnav #myLinks {
+  display: none;
+}
+
+/* Style navigation menu links */
+.topnav a {
+  color: white;
+	background: black;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  display: block;
+}
+
+/* Style the hamburger menu */
+.topnav a.icon {
+  background: black;
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+/* Style the active link (or home/logo) */
+.active {
+  background-color: #04AA6D;
+  color: white;
+}
 		</style>
 	</head>
 	<body>
+		<!-- Top Navigation Menu -->
+		<div class="topnav">
+		 <a href="#home" class="active">evi</a>
+		 <!-- Navigation links (hidden by default) -->
+		 <div id="myLinks">
+			 <a href="#news">News</a>
+			 <a href="#contact">Contact</a>
+			 <a href="#about">About</a>
+		 </div>
+		 <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
+		 <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+			 <i class="fa fa-bars"></i>
+		 </a>
+		</div>
     <ul></ul>
       <div>
     <input placeholder="message">
     <button>Send</button>
       </div>
+			<script type="text/javascript">
+			function myFunction() {
+var x = document.getElementById("myLinks");
+if (x.style.display === "block") {
+	x.style.display = "none";
+} else {
+	x.style.display = "block";
+}
+}
+			</script>
     <canvas id ="bg"></canvas>
+		<!-- Load an icon library to show a hamburger menu (bars) on small screens -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdn.socket.io/socket.io-3.0.0.js"></script>
     <script defer src="app.js"></script>
         <script src="./stats.min.js"></script>
