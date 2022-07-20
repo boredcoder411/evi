@@ -4,64 +4,71 @@
 		<meta charset="utf-8">
 		<title>FPS Game</title>
 		<style>
-			* {
-				overflow: hidden;
-			}
+		* {
+			overflow: hidden;
+		}
 
-      p {
-        color: white;
-        font-family: monospace;
-      }
+		p {
+			color: white;
+			font-family: monospace;
+		}
 
-			body {
-                margin: 0;
-      }
+		body {
+							margin: 0;
+		}
+.topnav a, body>ul *, body>div *{
 
-      #bg {
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: -100;
-      }
+pointer-events:all;
+z-index:999;
+}
+		#bg {
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: -100;
+		}
 
-      ul {
-        color: white;
-        font-family: monospace;
-        list-style-type: none;
-      }
+		ul {
+			color: white;
+			font-family: monospace;
+			list-style-type: none;
+		}
 
-			.gun {
-				width: 100vw;
-  			height: 100vh;
-  			margin: 0;
-  			display: flex;
-  			justify-content: center;
-  			align-items: flex-end;
-			}
+		.gun {
+			width: 100vw;
+			height: 100vh;
+			margin: 0;
+			display: flex;
+			justify-content: center;
+			align-items: flex-end;
+			position:absolute;
+			top:0;
+			z-index:-10;
+		}
 
-			.topnav #myLinks {
-  			display: none;
-				font-family: monospace;
-			}
+		.topnav #myLinks {
+			display: none;
+			font-family: monospace;
+		}
 
-			.topnav a {
-  			padding: 14px 16px;
-  			text-decoration: none;
-  			font-size: 17px;
-  			display: block;
-			}
+		.topnav a {
+			padding: 14px 16px;
+			text-decoration: none;
+			font-size: 17px;
+			display: block;
+		}
 
-			.topnav a.icon {
-				color: white;
-  			display: block;
-  			position: absolute;
-  			top: 0;
-			}
+		.topnav a.icon {
+			color: white;
+			display: block;
+			position: absolute;
+			top: 0;
+		}
 
-			a, a:hover, a:visited, a:active {
-  			color: white;
-  			text-decoration: none;
- 			}
+		a, a:hover, a:visited, a:active {
+			color: white;
+			text-decoration: none;
+		}
 		</style>
 	</head>
 	<body>
