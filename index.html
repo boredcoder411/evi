@@ -126,7 +126,8 @@ if (x.style.display === "block") {
 					requestAnimationFrame( update )
 				}
             import * as THREE from "https://cdn.skypack.dev/three@0.136"
-            import {PointerLockControls} from "https://cdn.skypack.dev/three@0.136/examples/jsm/controls/PointerLockControls"
+            import { PointerLockControls } from "https://cdn.skypack.dev/three@0.136/examples/jsm/controls/PointerLockControls"
+						import { GLTFLoader } from 'https://cdn.skypack.dev/pin/three@v0.136.0-4Px7Kx1INqCFBN0tXUQc/mode=imports/unoptimized/examples/jsm/loaders/GLTFLoader.js';
 
             const grid = new THREE.GridHelper()
             grid.position.set(0, -0.5, 0)
@@ -150,7 +151,12 @@ if (x.style.display === "block") {
             const material = new THREE.MeshBasicMaterial({map: cratetexture});
             const cube = new THREE.Mesh( geometry, material );
 
-            scene.add( cube );
+						const shiba = new GLTFLoader()
+						shiba.load("./shiba/scene.gltf", (gltfScene) => {
+							scene.add(gltfScene.scene)
+						})
+
+            //scene.add( cube );
             document.querySelector(".gun").addEventListener("click", () => {
                 controls.lock()
             })
@@ -185,14 +191,13 @@ if (x.style.display === "block") {
                     controls.unlock()
                   document.querySelector("input").focus()
                 }
-                /*
+
                 if (keyboard[" "]) {
                     controls.getObject().position.y += actualSpeed
                 }
                 if (keyboard["Shift"] && controls.getObject().position.y > 0) {
                     controls.getObject().position.y -= actualSpeed
                 }
-              */
             }
 			function animate() {
 				renderer.render( scene, camera );
